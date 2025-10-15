@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TFC Email + Donation Performance (Aug 19 – Sep 10, 2025)</title>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --green: #10b981; /* accents */
+      --blue: #3b82f6;  /* primary accent */
+      --amber: #f59e0b; /* accent 2 */
+      --teal: #14b8a6;  /* accent 3 */
+      --red: #ef4444;
+      --shadow: 0 10px 20px rgba(0,0,0,.04), 0 2px 6px rgba(0,0,0,.04);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+    h1 { font-size: 28px; margin: 0 0 4px; }
+    .muted { color: var(--muted); }
+
+    .kpi-grid { display: grid; gap: 16px; margin: 24px 0 28px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } }
+    .kpi {
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px;
+    }
+    .kpi h3 { margin: 0 0 8px; font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing: .02em; }
+    .kpi .val { font-size: 26px; font-weight: 700; }
+    .kpi small { color: var(--muted); }
+
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px; }
+    .card h3 { margin: 0 0 12px; font-size: 18px; }
+
+    .flex { display: flex; gap: 24px; flex-wrap: wrap; align-items: stretch; }
+    .flex > div { flex: 1 1 320px; }
+
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 14px; }
+    .legend .key { display: inline-flex; align-items: center; gap: 8px; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+    .big-stat { text-align: center; padding: 16px; }
+    .big-stat .number { font-size: 48px; font-weight: 800; line-height: 1; }
+    .big-stat .sub { color: var(--muted); margin-top: 6px; }
+    .bar-wrap { width: 100%; height: 10px; background: #eef2f7; border-radius: 999px; margin-top: 14px; overflow: hidden; }
+    .bar { height: 100%; background: var(--green); width: 0%; transition: width .6s ease; }
+
+    .rows { display: grid; gap: 8px; }
+    .row { display: flex; justify-content: space-between; }
+
+    .bullets { display: grid; gap: 10px; }
+    .bullet { display: grid; grid-template-columns: 12px 1fr; gap: 12px; align-items: start; }
+    .dot { width: 8px; height: 8px; border-radius: 999px; margin-top: 6px; }
+    .dot.green { background: var(--green); }
+    .dot.blue { background: var(--blue); }
+    .dot.amber { background: var(--amber); }
+
+    .chart-wrap { width: 100%; height: 360px; position: relative; }
+    svg { width: 100%; height: 100%; }
+
+    .tooltip {
+      position: absolute; pointer-events: none; background: #111827; color: #fff; font-size: 12px;
+      padding: 8px 10px; border-radius: 8px; white-space: nowrap; box-shadow: 0 6px 18px rgba(0,0,0,.15);
+      transform: translate(-50%, -110%); opacity: 0; transition: opacity .15s ease;
+    }
+    .foot { margin-top: 28px; font-size: 12px; color: var(--muted); }
+    code.inline { background: #f3f4f6; padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1> TFC Email + Donation Performance</h1>
+      <div class="muted">Window: Aug 19 – Sep 10, 2025</div>
+    </header>
+
+    <!-- KPI STRIP -->
+    <section class="kpi-grid">
+      <div class="kpi"><h3>Total Raised</h3><div class="val">$2,738</div></div>
+      <div class="kpi"><h3>Raised via Email</h3><div class="val">$823 <small>(≈30%)</small></div></div>
+      <div class="kpi"><h3>Email-Attributed Donations</h3><div class="val">13</div></div>
+    </section>
+
+    <!-- DONATION BREAKDOWN -->
+
+    <!-- DONATION BREAKDOWN: By Amount -->
+<section class="card">
+  <h3>Donation Breakdown — By Amount (Email only)</h3>
+  <div class="rows">
+    <div class="row"><span>Small-dollar (≤ $50)</span><strong>9 donations</strong></div>
+    <div class="row"><span>Large-dollar (> $50)</span><strong>4 donations</strong></div>
+  </div>
+</section>
+
+<!-- DONATION BREAKDOWN: Email vs. Non-Email -->
+<section class="card">
+  <h3>Donation Breakdown — Email vs. Non-Email</h3>
+  <div class="rows">
+    <div class="row"><span>Email</span><strong>$823 <span class="muted">(≈30%)</span></strong></div>
+    <div class="row"><span>Non-Email</span><strong>$1,915 <span class="muted">(≈70%)</span></strong></div>
+    <div class="row"><span>Avg. Gift</span><strong>Email ≈ $63 vs. Non-Email $64</strong></div>
+  </div>
+</section>
+
+    <!-- DONOR COMPOSITION -->
+    <section class="card">
+      <div class="flex">
+        <div>
+          <h3>Donor Composition (New vs. Repeat)</h3>
+          <div class="chart-wrap">
+            <svg id="donut" viewBox="0 0 420 420" preserveAspectRatio="xMidYMid meet" aria-label="Donor Composition Donut"></svg>
+            <div id="tooltip" class="tooltip"></div>
+          </div>
+          <div class="legend">
+            <span class="key"><span class="swatch" style="background: var(--green)"></span>Repeat (7)</span>
+            <span class="key"><span class="swatch" style="background: var(--blue)"></span>New (6)</span>
+          </div>
+        </div>
+        <div>
+          <div class="big-stat">
+            <div class="number" id="repeatPct">54%</div>
+            <div class="sub">Repeat donations (7 of 13 attributed)</div>
+            <div class="bar-wrap"><div class="bar" id="repeatBar" style="width: 54%"></div></div>
+          </div>
+          <p class="muted" style="margin: 6px 12px 0 12px;">
+            Since the last dashboard, <strong>2 new donors</strong> joined and <strong>1 repeat donor</strong> gave again since last dashboard.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DONATION TIMING -->
+    <section class="card">
+      <h3>Cumulative Donations Over Time</h3>
+      <div class="chart-wrap" style="height: 380px;">
+        <svg id="cumLine" viewBox="0 0 800 360" preserveAspectRatio="xMidYMid meet" aria-label="Cumulative Donations Line"></svg>
+        <div id="tooltip2" class="tooltip"></div>
+      </div>
+      <div class="muted" style="margin-top:8px;">Running total since Aug.19</div>
+    </section>
+
+    <!-- EMAIL SPOTLIGHTS -->
+    <section class="card">
+      <h3>Email Spotlights</h3>
+      <div class="flex">
+        <div class="card" style="flex:1 1 420px; padding:16px;">
+          <h4 style="margin:0 0 6px;">Welcome Day 4 — Aug-22</h4>
+          <div class="muted" style="margin-bottom:10px;">Refcode: <code class="inline">20250822-tfc-welcomeday4</code></div>
+          <div class="rows">
+            <div class="row"><span>Open Rate</span><strong>6.97%</strong></div>
+            <div class="row"><span>Click Rate</span><strong>0.43%</strong></div>
+            <div class="row"><span>Click per Open (CTOR)</span><strong>6.12%</strong></div>
+            <div class="row"><span>Unsubscribe Rate</span><strong>0.68%</strong></div>
+            <div class="row muted"><span>3,991 sent • 33 bounces • 278 opens • 17 clicks • 27 unsubs</span></div>
+          </div>
+        </div>
+        <div class="card" style="flex:1 1 420px; padding:16px;">
+          <h4 style="margin:0 0 6px;">Fundraising Follow-Up — Aug-31</h4>
+          <div class="muted" style="margin-bottom:10px;">Refcode: <code class="inline">20250831-tfc-eom2</code> </div>
+          <div class="rows">
+            <div class="row"><span>Open Rate</span><strong>3.71%</strong></div>
+            <div class="row"><span>Click Rate</span><strong>0.15%</strong></div>
+            <div class="row"><span>Click per Open (CTOR)</span><strong>4.07%</strong></div>
+            <div class="row"><span>Unsubscribe Rate</span><strong>0.16%</strong></div>
+            <div class="row muted"><span>13,897 sent • 5 bounces • 516 opens • 21 clicks • 22 unsubs</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY TAKEAWAYS -->
+    <section class="card" style="background:#eff6ff;">
+      <h3 style="color:#1e40af; margin-bottom:12px;">Key Takeaways</h3>
+      <div class="bullets">
+        <div class="bullet"><div class="dot blue"></div><div>Email gifts total <strong>$823 (30% of overall fundraising)</strong></div></div>
+        <div class="bullet"><div class="dot green"></div><div>Majority of email donors are repeat supporters</div></div>
+        <div class="bullet"><div class="dot amber"></div><div>Average gift size via email is on par with non-email donations (<strong>$63 vs. $64</strong>).</div></div>
+        <div class="bullet"><div class="dot blue"></div><div>Strongest performing emails remain <em>Welcome Day 4</em> and <em>End-of-Month Follow-Up</em>.</div></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // -------------------- Helpers --------------------
+    function getCSS(varName) { return getComputedStyle(document.documentElement).getPropertyValue(varName).trim(); }
+
+    // Simple tooltip controller
+    function showTip(el, x, y, html) {
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      el.innerHTML = html;
+      el.style.opacity = 1;
+    }
+    function hideTip(el) { el.style.opacity = 0; }
+
+    // -------------------- Donut (New vs Repeat) --------------------
+    const donutData = [
+      { label: 'Repeat', value: 7, color: getCSS('--green') },
+      { label: 'New', value: 6, color: getCSS('--blue') },
+    ];
+    drawDonut('donut', donutData, { cx: 210, cy: 210, r: 140, thickness: 64, tipId: 'tooltip' });
+
+    function drawDonut(svgId, data, { cx=150, cy=150, r=100, thickness=40, tipId=null } = {}) {
+      const svg = document.getElementById(svgId);
+      const tooltip = tipId ? document.getElementById(tipId) : null;
+      const total = data.reduce((a,b) => a + b.value, 0) || 1;
+      let start = -Math.PI/2;
+
+      data.forEach(d => {
+        const slice = (d.value / total) * Math.PI * 2;
+        const end = start + slice;
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', describeRingSegment(cx, cy, r, r - thickness, start, end));
+        path.setAttribute('fill', d.color);
+        path.setAttribute('opacity', '0.95');
+        path.style.cursor = 'pointer';
+        svg.appendChild(path);
+
+        if (tooltip) {
+          path.addEventListener('mousemove', (e) => {
+            const pct = ((d.value / total) * 100).toFixed(0);
+            showTip(tooltip, e.offsetX, e.offsetY, `<strong>${d.label}</strong>: ${d.value} (${pct}%)`);
+          });
+          path.addEventListener('mouseleave', () => hideTip(tooltip));
+        }
+        start = end;
+      });
+
+      // inner white circle for crispness
+      const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      ring.setAttribute('cx', cx); ring.setAttribute('cy', cy); ring.setAttribute('r', r - thickness);
+      ring.setAttribute('fill', '#fff');
+      svg.appendChild(ring);
+    }
+
+    function describeRingSegment(cx, cy, rOuter, rInner, start, end) {
+      // outer arc
+      const p1 = polar(cx, cy, rOuter, start);
+      const p2 = polar(cx, cy, rOuter, end);
+      const largeArc = (end - start) % (Math.PI * 2) > Math.PI ? 1 : 0;
+
+      // inner arc
+      const p3 = polar(cx, cy, rInner, end);
+      const p4 = polar(cx, cy, rInner, start);
+
+      return [
+        `M ${p1.x} ${p1.y}`,
+        `A ${rOuter} ${rOuter} 0 ${largeArc} 1 ${p2.x} ${p2.y}`,
+        `L ${p3.x} ${p3.y}`,
+        `A ${rInner} ${rInner} 0 ${largeArc} 0 ${p4.x} ${p4.y}`,
+        'Z'
+      ].join(' ');
+    }
+
+    function polar(cx, cy, r, angle) { return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) }; }
+
+    // -------------------- Cumulative Line --------------------
+    // NOTE: Replace this series with your exact cumulative data as needed.
+    const cumulative = [
+      { date: '2025-08-19', total: 350 },
+      { date: '2025-08-20', total: 700 },
+      { date: '2025-08-21', total: 1450 },
+      { date: '2025-08-22', total: 1835 },
+      { date: '2025-08-25', total: 1845 },
+      { date: '2025-08-28', total: 1855 },
+      { date: '2025-08-29', total: 1905 },
+      { date: '2025-08-30', total: 1915 },
+      { date: '2025-08-31', total: 2143 },
+      { date: '2025-09-01', total: 2203 },
+      { date: '2025-09-02', total: 2213 },
+      { date: '2025-09-03', total: 2313 },
+      { date: '2025-09-05', total: 2338 },
+      { date: '2025-09-07', total: 2588 },
+      { date: '2025-09-08', total: 2688 },
+      { date: '2025-09-09', total: 2738 }
+    ];
+
+    drawCumulativeLine('cumLine', cumulative, { tipId: 'tooltip2' });
+
+    function drawCumulativeLine(svgId, series, { padding=40, tipId=null } = {}) {
+      const svg = document.getElementById(svgId);
+      const tooltip = tipId ? document.getElementById(tipId) : null;
+      const W = svg.viewBox.baseVal.width || 800;
+      const H = svg.viewBox.baseVal.height || 360;
+      const left = padding, right = padding, top = padding, bottom = padding + 10;
+
+      const xs = series.map(d => new Date(d.date).getTime());
+      const ys = series.map(d => d.total);
+      const minX = Math.min(...xs), maxX = Math.max(...xs);
+      const minY = Math.min(...ys), maxY = Math.max(...ys);
+
+      const x = t => left + ((t - minX) / (maxX - minX)) * (W - left - right);
+      const y = v => H - bottom - ((v - minY) / (maxY - minY)) * (H - top - bottom);
+
+      // axes
+      const axis = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      axis.setAttribute('d', `M ${left} ${H-bottom} L ${W-right} ${H-bottom} M ${left} ${H-bottom} L ${left} ${top}`);
+      axis.setAttribute('stroke', '#e5e7eb'); axis.setAttribute('fill', 'none'); axis.setAttribute('stroke-width', '1');
+      svg.appendChild(axis);
+
+      // line path
+      const d = series.map((p, i) => `${i ? 'L' : 'M'} ${x(new Date(p.date).getTime())} ${y(p.total)}`).join(' ');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', getCSS('--amber'));
+      path.setAttribute('stroke-width', '3');
+      svg.appendChild(path);
+
+      // points
+      series.forEach(p => {
+        const cx = x(new Date(p.date).getTime());
+        const cy = y(p.total);
+        const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', 5);
+        c.setAttribute('fill', getCSS('--amber'));
+        c.style.cursor = 'pointer';
+        svg.appendChild(c);
+
+        if (tooltip) {
+          c.addEventListener('mousemove', (e) => {
+            const dStr = new Date(p.date).toLocaleDateString(undefined, { month:'short', day:'numeric' });
+            showTip(tooltip, e.offsetX, e.offsetY, `<strong>${dStr}</strong><br/>$${p.total.toLocaleString()}`);
+          });
+          c.addEventListener('mouseleave', () => hideTip(tooltip));
+        }
+      });
+    }
+  </script>
+</body>
+</html>
