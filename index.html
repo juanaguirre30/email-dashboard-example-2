@@ -260,26 +260,24 @@
 
     function polar(cx, cy, r, angle) { return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) }; }
 
-    // -------------------- Cumulative Line --------------------
-    // NOTE: Replace this series with your exact cumulative data as needed.
     const cumulative = [
-      { date: '2025-08-19', total: 350 },
-      { date: '2025-08-20', total: 700 },
-      { date: '2025-08-21', total: 1450 },
-      { date: '2025-08-22', total: 1835 },
-      { date: '2025-08-25', total: 1845 },
-      { date: '2025-08-28', total: 1855 },
-      { date: '2025-08-29', total: 1905 },
-      { date: '2025-08-30', total: 1915 },
-      { date: '2025-08-31', total: 2143 },
-      { date: '2025-09-01', total: 2203 },
-      { date: '2025-09-02', total: 2213 },
-      { date: '2025-09-03', total: 2313 },
-      { date: '2025-09-05', total: 2338 },
-      { date: '2025-09-07', total: 2588 },
-      { date: '2025-09-08', total: 2688 },
-      { date: '2025-09-09', total: 2738 }
-    ];
+  { date: '2025-08-19', total: 200 },
+  { date: '2025-08-20', total: 400 },
+  { date: '2025-08-21', total: 800 },
+  { date: '2025-08-22', total: 1150 },
+  { date: '2025-08-25', total: 1200 },
+  { date: '2025-08-28', total: 1250 },
+  { date: '2025-08-29', total: 1350 },
+  { date: '2025-08-30', total: 1400 },
+  { date: '2025-08-31', total: 1700 },
+  { date: '2025-09-01', total: 1850 },
+  { date: '2025-09-02', total: 1900 },
+  { date: '2025-09-03', total: 2050 },
+  { date: '2025-09-05', total: 2150 },
+  { date: '2025-09-07', total: 2400 },
+  { date: '2025-09-08', total: 2550 },
+  { date: '2025-09-09', total: 2621 }
+];
 
     drawCumulativeLine('cumLine', cumulative, { tipId: 'tooltip2' });
 
